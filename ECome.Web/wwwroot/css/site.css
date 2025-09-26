@@ -1,0 +1,113 @@
+﻿
+.modern-body {
+    background-color: #fffdf8;
+    color: #333;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+.modern-navbar {
+    background-color: #ff6f00;
+}
+
+.modern-brand {
+    font-weight: bold;
+    color: white !important;
+    display: flex;
+    align-items: center;
+}
+
+    .modern-brand .brand-logo {
+        height: 32px;
+        margin-right: 8px;
+    }
+
+.modern-nav-link {
+    color: white !important;
+    transition: 0.3s;
+}
+
+    .modern-nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-radius: 6px;
+        color: #fff !important;
+    }
+
+
+.modern-dropdown {
+    background-color: #fff;
+    border: 1px solid #ff6f00;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.modern-dropdown-item {
+    color: #333;
+    transition: 0.3s;
+}
+
+    .modern-dropdown-item:hover {
+        background-color: #ff6f00;
+        color: #fff;
+    }
+
+.modern-divider {
+    border-top: 1px solid #ff6f00;
+}
+
+
+.modern-container {
+    margin-top: 20px;
+}
+
+.modern-main {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+
+.modern-footer {
+    background-color: #ff6f00;
+    color: white;
+    padding: 25px 0;
+    margin-top: 40px;
+}
+
+.footer-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.footer-subtitle {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.social-links .social-link {
+    color: white;
+    font-size: 20px;
+    margin: 0 8px;
+    transition: 0.3s;
+}
+
+    .social-links .social-link:hover {
+        color: #ffe0b2;
+    }
+
+.footer-copyright {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+
+.btn-primary {
+    background-color: #ff6f00;
+    border-color: #ff6f00;
+}
+
+    .btn-primary:hover {
+        background-color: #e65c00;
+        border-color: #e65c00;
+    }

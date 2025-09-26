@@ -1,0 +1,146 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - bookYBook</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
+
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="~/BulkyBookWeb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Modern CSS -->
+    <link rel="stylesheet" href="~/css/modern-styles.css" asp-append-version="true" />
+</head>
+<body class="modern-body">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark modern-navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand modern-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/images/book.png" alt="Logo" class="brand-logo" />
+                    <span>bookYBook</span>
+                </a>
+
+                <button class="navbar-toggler modern-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                        <li class="nav-item">
+                            <a class="nav-link modern-nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house me-1"></i>Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link modern-nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">
+                                <i class="bi bi-clipboard-data me-1"></i>Manage Order
+                            </a>
+                        </li>
+
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle modern-nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-gear me-1"></i>Content Management
+                                </a>
+                                <ul class="dropdown-menu modern-dropdown">
+                                    <li>
+                                        <a class="dropdown-item modern-dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">
+                                            <i class="bi bi-tags me-2"></i>Category
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item modern-dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">
+                                            <i class="bi bi-box me-2"></i>Product
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item modern-dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index">
+                                            <i class="bi bi-building me-2"></i>Company
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider modern-divider" /></li>
+                                    <li>
+                                        <a class="dropdown-item modern-dropdown-item" asp-area="Identity" asp-page="/Account/Register">
+                                            <i class="bi bi-person-plus me-2"></i>Create User
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item modern-dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">
+                                            <i class="bi bi-people me-2"></i>Manage User
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link modern-nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                                <i class="bi bi-cart3 me-1"></i>
+                                @await Component.InvokeAsync("ShoppingCart")
+                            </a>
+                        </li>
+                    </ul>
+
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container modern-container">
+        <main role="main" class="pb-3 modern-main">
+            <partial name="_Notification" />
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="modern-footer">
+        <div class="container text-center">
+            <div class="footer-content">
+                <h5 class="footer-title">bookYBook</h5>
+                <p class="footer-subtitle">Follow us on social media</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" class="social-link">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="social-link">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-link">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="social-link">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                </div>
+                <p class="footer-copyright">&copy; @DateTime.Now.Year bookYBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Libraries -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" defer></script>
+    <script src="https://cdn.tiny.cloud/1/g28lhnxtlihu4l4a381gw7tz47voznshwbi10lmsvlekrfme/tinymce/6/tinymce.min.js" referrerpolicy="origin" defer></script>
+
+    <!-- Project JS -->
+    <script src="~/js/site.js" asp-append-version="true" defer></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
